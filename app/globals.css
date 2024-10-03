@@ -2,26 +2,76 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+.card {
+  /* margin: 0 auto; */
+  width: 320px;
+  background: white;
+  text-align: center;
+  border-radius: 10px;
+  position: relative;
+  border: 1.5px solid #302e2e;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.card {
+  transition: padding 0.3s ease-in-out; /* Smooth transition */
+}
+
+/* .card:hover {
+  padding: 3px; 
+} */
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.card:hover::after,
+.card:hover::before {
+  content: "";
+  position: absolute;
+  height: 110%;
+  width: 110%;
+  background-image: conic-gradient(
+    from var(--angle),
+    #e84a4a 10%,
+    /* Black - shorter range */ rgb(255 247 237) 15%,
+    /* Light color starts earlier */ rgb(255 247 237) 40%,
+    /* Medium grey */ rgb(255 247 237) 60%,
+    /* Light color starts later */ rgb(255 247 237) 90%,
+    /* Shorter black section */ rgb(255 247 237) 100%
+      /* Very light color to finish */
+  );
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  padding: 3px;
+  border-radius: 9px;
+  animation: 2s spin linear infinite;
+}
+
+.card:hover::before {
+  /* filter: blur(0.5rem); */
+  opacity: 0.5;
+}
+
+@keyframes spin {
+  from {
+    --angle: 0deg;
+  }
+  to {
+    --angle: 360deg;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.card:hover .dropdown-content {
+  height: 200px;
+  z-index: 1000;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.dropdown-content {
+  transition: height 0.75s ease-out;
 }
