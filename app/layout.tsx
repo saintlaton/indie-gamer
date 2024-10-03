@@ -34,7 +34,7 @@ export default function RootLayout({
         </header>
         <main className="grow py-3">{children}</main>
         <footer className="border-t py-3 text-center text-lg text-slate-500">
-          Game data and images courtesy of{" "}
+          Game data and images courtesy of TEST DEPLOY
           <a
             href="https://rawg.io"
             target="_blank "
